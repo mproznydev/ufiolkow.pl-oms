@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "messages",
+  "info": {
+    "name": "message",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "message": {
+      "type": "richtext"
+    },
+    "sender": {
+      "type": "string"
+    },
+    "client": {
+      "type": "string"
+    }
+  }
+}

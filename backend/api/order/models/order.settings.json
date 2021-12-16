@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "name": "order",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "products": {
+      "type": "json"
+    },
+    "clientName": {
+      "type": "string"
+    },
+    "clientAdress": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "default": "new",
+      "required": false
+    }
+  }
+}
