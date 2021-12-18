@@ -6,6 +6,7 @@ import axios from 'axios';
 import ProductDetailsModal from '../ProductDetailsModal/ProductDetailsModal';
 import { useOrders } from 'hooks/useOrders';
 import { useOrder } from 'hooks/useOrder';
+import ErrorMessage from 'components/atoms/ErrorMessage/ErrorMessage';
 
 const StyledViewWrapper = styled(ViewWrapper)`
   display: flex;
@@ -79,6 +80,7 @@ const Kanban = ({ className }) => {
   const [orderDetailsInModal, setOrderDetailsInModal] = useState({});
   const [isModalOpen, SetIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  console.log(orders);
 
   const handleChangeOrderStatus = (e) => {
     if (e.target.value !== orderDetailsInModal.status) {
@@ -192,6 +194,7 @@ const Kanban = ({ className }) => {
           ) : null}
         </>
       )}
+      {OrdersStatus === 'success' && !orders.length > 0 ? <ErrorMessage></ErrorMessage> : null}
     </StyledViewWrapper>
   );
 };

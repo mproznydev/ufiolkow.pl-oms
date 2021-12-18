@@ -18,7 +18,9 @@ const UnauthenticatedApp = () => {
 
   return (
     <Wrapper>
-      <UnauthenticatedContentWrapper>{!currentUser.isAuthenticated ? <Outlet></Outlet> : <Navigate to="/"></Navigate>}</UnauthenticatedContentWrapper>
+      <UnauthenticatedContentWrapper>
+        {!currentUser.isAuthenticated || !currentUser ? <Outlet></Outlet> : <Navigate to="/"></Navigate>}
+      </UnauthenticatedContentWrapper>
     </Wrapper>
   );
 };

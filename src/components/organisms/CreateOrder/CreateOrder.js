@@ -76,7 +76,6 @@ const CreateOrder = () => {
     e.preventDefault();
     if (clientFormValues.clientName !== '' && clientFormValues.clientAdress !== '' && products.length > 0) {
       handleCreateOrder({ clientName: clientFormValues.clientName, clientAdress: clientFormValues.clientAdress, products: [...products] });
-
       // navigate('/orders');
       setClientFormValues(initialClientFormValues);
       setProductFormValues(initialProductFormValues);

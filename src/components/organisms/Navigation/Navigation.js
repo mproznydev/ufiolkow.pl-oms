@@ -14,7 +14,7 @@ function Navigation() {
   const handleLogout = async () => {
     try {
       await axios.post(
-        'http://localhost:1337/logout',
+        'https://ufiolkow-oms.herokuapp.com/logout',
         {},
         {
           withCredentials: true,

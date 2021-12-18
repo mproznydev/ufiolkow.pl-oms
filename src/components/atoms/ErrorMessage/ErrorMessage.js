@@ -10,7 +10,7 @@ const ErrorText = styled.div`
 const ErrorMessage = () => {
   return (
     <>
-      <ErrorText>Sorry but there is an error...</ErrorText>
+      <ErrorText>Sorry but there is no objects...</ErrorText>
     </>
   );
 };

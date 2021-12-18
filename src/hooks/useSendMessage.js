@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const handleSendMessage = async (message) => {
   try {
-    return await axios.post(`http://localhost:1337/messages`, { ...message }, { withCredentials: true });
+    return await axios.post(`https://ufiolkow-oms.herokuapp.com/messages`, { ...message }, { withCredentials: true });
   } catch (e) {}
 };
 

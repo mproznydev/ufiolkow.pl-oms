@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const findClient = async () => {
   try {
-    const resp = await axios.get(`http://localhost:1337/clients/`, { withCredentials: true });
+    const resp = await axios.get(`https://ufiolkow-oms.herokuapp.com/clients/`, { withCredentials: true });
     return resp.data;
   } catch (e) {
     console.log(e);

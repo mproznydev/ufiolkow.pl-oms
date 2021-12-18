@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const handleDeleteOrder = async (id) => {
   try {
-    return await axios.delete(`http://localhost:1337/orders/${id}`, { withCredentials: true });
+    return await axios.delete(`https://ufiolkow-oms.herokuapp.com/orders/${id}`, { withCredentials: true });
   } catch (e) {}
 };
 

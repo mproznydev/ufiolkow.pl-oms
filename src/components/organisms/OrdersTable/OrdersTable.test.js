@@ -19,6 +19,6 @@ describe('Orders Table', () => {
     );
     const result = renderWithProviders(<OrdersTable></OrdersTable>);
 
-    expect(await result.findByText(/Sorry but there is an error/i)).toBeInTheDocument();
+    expect(await result.findByText(/Sorry but there is no objects/i)).toBeInTheDocument();
   });
 });

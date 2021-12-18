@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import Navigation from 'components/organisms/Navigation/Navigation';
 import LoggedAs from 'components/organisms/LoggedAs/LoggedAs';
 import SearchBar from 'components/organisms/SearchBar/SearchBar';
-import { OrdersProvider } from 'contexts/OrdersProvider';
 import { ReactComponent as LogoIcon } from 'assets/images/logo-white.svg';
 
 const Wrapper = styled.div`
@@ -58,14 +57,12 @@ const AuthenticatedApp = () => {
         </IsLoadingWrapper>
       ) : (
         <Wrapper>
-          <OrdersProvider>
-            <Navigation></Navigation>
-            <SearchAreaWrapper>
-              <LoggedAs></LoggedAs>
-              <StyledSearchBar></StyledSearchBar>
-            </SearchAreaWrapper>
-            <Outlet></Outlet>
-          </OrdersProvider>
+          <Navigation></Navigation>
+          <SearchAreaWrapper>
+            <LoggedAs></LoggedAs>
+            <StyledSearchBar></StyledSearchBar>
+          </SearchAreaWrapper>
+          <Outlet></Outlet>
         </Wrapper>
       )}
     </>

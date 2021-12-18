@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const fetchOrders = async (endpoint) => {
   try {
-    const resp = await axios.get(`http://localhost:1337/${endpoint}`, { withCredentials: true });
+    const resp = await axios.get(`https://ufiolkow-oms.herokuapp.com/${endpoint}`, { withCredentials: true });
     return resp.data;
   } catch (e) {
     console.log(e);

@@ -33,7 +33,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await axios
-        .post('http://localhost:1337/auth/local', userData, {
+        .post('https://ufiolkow-oms.herokuapp.com/auth/local', userData, {
           withCredentials: true,
         })
         .then((res) => {

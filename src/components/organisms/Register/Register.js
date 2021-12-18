@@ -32,7 +32,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:1337/auth/local/register', formValue).then((res) => {
+      await axios.post('https://ufiolkow-oms.herokuapp.com/auth/local/register', formValue).then((res) => {
         if (res.status === 200) {
           setFormValue(initialData);
           navigate('/login');

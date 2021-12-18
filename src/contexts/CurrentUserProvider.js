@@ -21,7 +21,7 @@ export const CurrentUserProvider = ({ children }) => {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get('http://localhost:1337/users/me', {
+        const { data } = await axios.get('https://ufiolkow-oms.herokuapp.com/users/me', {
           withCredentials: true,
         });
         if (data.id) {

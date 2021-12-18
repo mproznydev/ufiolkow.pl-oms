@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const handleSaveOrder = async (order) => {
   try {
-    return await axios.put(`http://localhost:1337/orders/${order.id}`, { ...order }, { withCredentials: true });
+    return await axios.put(`https://ufiolkow-oms.herokuapp.com/orders/${order.id}`, { ...order }, { withCredentials: true });
   } catch (e) {}
 };
 

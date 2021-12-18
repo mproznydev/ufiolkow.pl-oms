@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const fetchOrders = async () => {
   try {
-    const resp = await axios.get(`http://localhost:1337/orders`, { withCredentials: true });
+    const resp = await axios.get(`https://ufiolkow-oms.herokuapp.com/orders`, { withCredentials: true });
     return resp.data;
   } catch (e) {
     console.log(e);
