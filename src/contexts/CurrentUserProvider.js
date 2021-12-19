@@ -6,6 +6,8 @@ const CurrentUserDispatchContext = createContext();
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'FETCHFAIL':
+      return { ...state, isLoading: false };
     case 'LOGIN':
       return { ...state, ...action.user, isAuthenticated: true, isLoading: false };
     case 'LOGOUT':
@@ -21,14 +23,13 @@ export const CurrentUserProvider = ({ children }) => {
   useEffect(() => {
     (async () => {
       try {
+        console.log('the fuck');
         const { data } = await axios.get('https://ufiolkow-oms.herokuapp.com/users/me', {
           withCredentials: true,
         });
-        if (data.id) {
-          dispatch({ type: 'LOGIN', user: data });
-        }
+        dispatch({ type: 'LOGIN', user: data });
       } catch (e) {
-        console.log(e);
+        dispatch({ type: 'FETCHFAIL' });
       }
     })();
   }, []);

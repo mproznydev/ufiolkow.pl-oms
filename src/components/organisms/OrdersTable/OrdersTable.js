@@ -12,6 +12,15 @@ import ErrorMessage from 'components/atoms/ErrorMessage/ErrorMessage';
 import Modal from 'components/organisms/Modal/Modal';
 import { Button } from 'components/atoms/Button/Button';
 
+const LoadingWrapper = styled.div`
+  text-align: center;
+  padding: 4rem 2rem;
+`;
+
+const StyledViewWrapper = styled(ViewWrapper)`
+  min-height: 400px;
+`;
+
 const Wrapper = styled.div`
   margin: 2rem;
 `;
@@ -79,6 +88,7 @@ const ModalWrapper = styled.div`
 
 const CreateNewOrderWrapper = styled.div`
   display: flex;
+
   justify-content: center;
   align-self: center;
   padding: 0.5rem;
@@ -100,65 +110,71 @@ const OrderDetailsTable = () => {
   };
   return (
     <Wrapper>
-      <ViewWrapper title="Orders">
-        <TableWrapper>
-          <TableHead>
-            <tr>
-              <TableTitle>Client name</TableTitle>
-              <TableTitle>Client adress</TableTitle>
-              <TableTitle>Products</TableTitle>
-              <TableTitle>Quantity</TableTitle>
-              <TableTitle>State</TableTitle>
-              <TableTitle>Created</TableTitle>
-              <TableTitle></TableTitle>
-            </tr>
-          </TableHead>
-          <TableBody>
-            {data
-              ? data.map((order) => (
-                  <OrderRow key={order.id}>
-                    <td onClick={() => handleOpenDetails(order.id)}>{order.clientName}</td>
-                    <td onClick={() => handleOpenDetails(order.id)}>{order.clientAdress}</td>
-                    <td onClick={() => handleOpenDetails(order.id)}>
-                      {order.products.map((product, id) => (
-                        <p key={id}>{product.name}</p>
-                      ))}
-                    </td>
-                    <td onClick={() => handleOpenDetails(order.id)}>
-                      {order.products.map((product, id) => (
-                        <p key={id}>{product.quantity}</p>
-                      ))}
-                    </td>
-                    <td onClick={() => handleOpenDetails(order.id)}>{order.status}</td>
-                    <td onClick={() => handleOpenDetails(order.id)}>{properData(order.published_at)}</td>
-                    <td>
-                      <DeleteButton onClick={() => setIsDeleteModalOpen(true)}>x</DeleteButton>
-                      {isDeleteModalOpen ? (
-                        <Modal>
-                          <ModalWrapper>
-                            <p>are you sure?</p>
-                            <Button onClick={() => handleDeleteOrder(order.id)}>delete</Button>
-                            <Button onClick={() => setIsDeleteModalOpen(false)}>go back</Button>
-                          </ModalWrapper>
-                        </Modal>
-                      ) : null}
-                    </td>
-                  </OrderRow>
-                ))
-              : null}
-            {OrdersStatus === 'success' && !data.length > 0 ? (
-              <OrderRow>
-                <td>
-                  <ErrorMessage />
-                </td>
-              </OrderRow>
-            ) : null}
-          </TableBody>
-        </TableWrapper>
+      <StyledViewWrapper title="Orders">
+        {OrdersStatus === 'success' && !data.length > 0 ? (
+          <ErrorMessage />
+        ) : (
+          <>
+            {OrdersStatus === 'loading' ? (
+              <LoadingWrapper>
+                <LoadingSpinner isPurple></LoadingSpinner>
+              </LoadingWrapper>
+            ) : (
+              <TableWrapper>
+                <TableHead>
+                  <tr>
+                    <TableTitle>Client name</TableTitle>
+                    <TableTitle>Client adress</TableTitle>
+                    <TableTitle>Products</TableTitle>
+                    <TableTitle>Quantity</TableTitle>
+                    <TableTitle>State</TableTitle>
+                    <TableTitle>Created</TableTitle>
+                    <TableTitle></TableTitle>
+                  </tr>
+                </TableHead>
+                <TableBody>
+                  {data
+                    ? data.map((order) => (
+                        <OrderRow key={order.id}>
+                          <td onClick={() => handleOpenDetails(order.id)}>{order.clientName}</td>
+                          <td onClick={() => handleOpenDetails(order.id)}>{order.clientAdress}</td>
+                          <td onClick={() => handleOpenDetails(order.id)}>
+                            {order.products.map((product, id) => (
+                              <p key={id}>{product.name}</p>
+                            ))}
+                          </td>
+                          <td onClick={() => handleOpenDetails(order.id)}>
+                            {order.products.map((product, id) => (
+                              <p key={id}>{product.quantity}</p>
+                            ))}
+                          </td>
+                          <td onClick={() => handleOpenDetails(order.id)}>{order.status}</td>
+                          <td onClick={() => handleOpenDetails(order.id)}>{properData(order.published_at)}</td>
+                          <td>
+                            <DeleteButton onClick={() => setIsDeleteModalOpen(true)}>x</DeleteButton>
+                            {isDeleteModalOpen ? (
+                              <Modal>
+                                <ModalWrapper>
+                                  <p>are you sure?</p>
+                                  <Button onClick={() => handleDeleteOrder(order.id)}>delete</Button>
+                                  <Button onClick={() => setIsDeleteModalOpen(false)}>go back</Button>
+                                </ModalWrapper>
+                              </Modal>
+                            ) : null}
+                          </td>
+                        </OrderRow>
+                      ))
+                    : null}
+                </TableBody>
+              </TableWrapper>
+            )}
+          </>
+        )}
+
         <CreateNewOrderWrapper>
           <StyledLink to="new"> {DeletingStatus === 'loading' ? <LoadingSpinner></LoadingSpinner> : 'Create new order'}</StyledLink>
         </CreateNewOrderWrapper>
-      </ViewWrapper>
+      </StyledViewWrapper>
     </Wrapper>
   );
 };
