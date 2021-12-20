@@ -4,14 +4,22 @@ import ViewWrapper from 'components/atoms/ViewWrapper/ViewWrapper';
 import { ElementWrapper } from 'components/atoms/ElementWrapper/ElementWrapper';
 import { useFetch } from 'hooks/useFetch';
 import LoadingSpinner from 'components/atoms/LoadingSpinner/LoadingSpinner';
+import ErrorMessage from 'components/atoms/ErrorMessage/ErrorMessage';
 
 const StyledViewWrapper = styled(ViewWrapper)`
   grid-column: 3/4;
   max-width: 400px;
   max-height: 100%;
+  min-height: 100%;
   justify-self: flex-end;
   overflow-y: scroll;
+  min-width: 400px;
 `;
+
+const LoadingWrapper = styled.div`
+  text-align: center;
+`;
+
 const NewsSectionTitle = styled.h1`
   margin: 0.5rem 0.7rem;
 `;
@@ -30,24 +38,27 @@ const Description = styled.p`
 `;
 
 function News({ className }) {
-  const { data: news, status } = useFetch('news');
+  const { data: news = [], status } = useFetch('news');
   return (
     <StyledViewWrapper className={className}>
       <NewsSectionTitle>News</NewsSectionTitle>
-      {news && news.length > 0 ? (
-        news.map((article) => (
-          <StyledElementWrapper key={article.title}>
-            <Title>{article.title}</Title>
-            <Description>{article.description}</Description>
-          </StyledElementWrapper>
-        ))
+      {status === 'success' && !news.length > 0 ? (
+        <ErrorMessage></ErrorMessage>
       ) : (
-        <StyledElementWrapper>
-          <Title>
-            <LoadingSpinner></LoadingSpinner>
-          </Title>
-          <Description></Description>
-        </StyledElementWrapper>
+        <>
+          {status === 'loading' ? (
+            <LoadingWrapper>
+              <LoadingSpinner isPurple></LoadingSpinner>
+            </LoadingWrapper>
+          ) : (
+            news.map((article) => (
+              <StyledElementWrapper key={article.title}>
+                <Title>{article.title}</Title>
+                <Description>{article.description}</Description>
+              </StyledElementWrapper>
+            ))
+          )}
+        </>
       )}
     </StyledViewWrapper>
   );

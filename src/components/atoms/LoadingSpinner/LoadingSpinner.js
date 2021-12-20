@@ -22,7 +22,7 @@ const Spinner = styled.div`
     width: 3px;
     height: 9px;
     border-radius: 20%;
-    background: #ffffff;
+    background: ${({ isPurple, theme }) => (isPurple ? theme.colors.secondary : '#ffffff')};
   }
   & div:nth-child(1) {
     transform: rotate(0deg);
@@ -83,9 +83,9 @@ const Spinner = styled.div`
   }
 `;
 
-const LoadingSpinner = () => {
+const LoadingSpinner = ({ isPurple }) => {
   return (
-    <Spinner>
+    <Spinner isPurple={isPurple}>
       <div></div>
       <div></div>
       <div></div>

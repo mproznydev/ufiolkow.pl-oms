@@ -7,11 +7,18 @@ import ProductDetailsModal from '../ProductDetailsModal/ProductDetailsModal';
 import { useOrders } from 'hooks/useOrders';
 import { useOrder } from 'hooks/useOrder';
 import ErrorMessage from 'components/atoms/ErrorMessage/ErrorMessage';
+import LoadingSpinner from 'components/atoms/LoadingSpinner/LoadingSpinner';
+
+const LoadingWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 const StyledViewWrapper = styled(ViewWrapper)`
   display: flex;
   justify-content: center;
   min-height: 320px;
+  min-width: 800px;
 `;
 const Order = styled.li`
   list-style: none;
@@ -63,20 +70,20 @@ const KanbanSectionWrapper = styled.div`
   }
 `;
 
-const IsLoadingWrapper = styled.div`
-  width: 600px;
-  height: 350px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  & p {
-    font-size: ${({ theme }) => theme.fontSize.xl};
-  }
-`;
+// const IsLoadingWrapper = styled.div`
+//   width: 600px;
+//   height: 350px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   & p {
+//     font-size: ${({ theme }) => theme.fontSize.xl};
+//   }
+// `;
 
 const Kanban = ({ className }) => {
-  const { data: orders, status: OrdersStatus } = useOrders();
-  const [allOrders, setAllOrders] = useState({ new: '', inProgress: '', done: '' });
+  const { data: orders = [], status: ordersStatus } = useOrders();
+  const [allOrders, setAllOrders] = useState({ new: [], inProgress: [], done: [] });
   const [orderDetailsInModal, setOrderDetailsInModal] = useState({});
   const [isModalOpen, SetIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -129,72 +136,77 @@ const Kanban = ({ className }) => {
 
   return (
     <StyledViewWrapper title="Kanban" className={className}>
-      {isLoading ? (
-        <IsLoadingWrapper>
-          <p>please wait...</p>
-        </IsLoadingWrapper>
+      {ordersStatus === 'success' && !orders.length > 0 ? (
+        <ErrorMessage></ErrorMessage>
       ) : (
         <>
-          <KanbanSectionWrapper isNew>
-            <p>New</p>
-            <UnOrderedList>
-              {allOrders.new.map((order, id) => (
-                <Order key={id}>
-                  <StyledElementWrapper
-                    onClick={() => {
-                      handleOrderDetailsInModal(order.id);
-                    }}
-                  >
-                    {order.clientName}
-                  </StyledElementWrapper>
-                </Order>
-              ))}
-            </UnOrderedList>
-          </KanbanSectionWrapper>
-          <KanbanSectionWrapper isInProgress>
-            <p>In progress</p>
-            <UnOrderedList>
-              {allOrders.inProgress.map((order, id) => (
-                <Order key={id}>
-                  <StyledElementWrapper
-                    onClick={() => {
-                      handleOrderDetailsInModal(order.id);
-                    }}
-                  >
-                    {order.clientName}
-                  </StyledElementWrapper>
-                </Order>
-              ))}
-            </UnOrderedList>
-          </KanbanSectionWrapper>
-          <KanbanSectionWrapper isDone>
-            <p>Done</p>
-            <UnOrderedList>
-              {allOrders.done.map((order, id) => (
-                <Order key={id}>
-                  <StyledElementWrapper
-                    onClick={() => {
-                      handleOrderDetailsInModal(order.id);
-                    }}
-                  >
-                    {order.clientName}
-                  </StyledElementWrapper>
-                </Order>
-              ))}
-            </UnOrderedList>
-          </KanbanSectionWrapper>
-          {isModalOpen ? (
-            <ProductDetailsModal
-              updateAllOrdersState={updateAllOrdersState}
-              saveChangesInApi={saveChangesInApi}
-              orderDetails={orderDetailsInModal}
-              SetIsModalOpen={SetIsModalOpen}
-              handleChangeOrderStatus={handleChangeOrderStatus}
-            ></ProductDetailsModal>
-          ) : null}
+          {ordersStatus === 'loading' ? (
+            <LoadingWrapper>
+              <LoadingSpinner isPurple></LoadingSpinner>
+            </LoadingWrapper>
+          ) : (
+            <>
+              <KanbanSectionWrapper isNew>
+                <p>New</p>
+                <UnOrderedList>
+                  {allOrders.new.map((order, id) => (
+                    <Order key={id}>
+                      <StyledElementWrapper
+                        onClick={() => {
+                          handleOrderDetailsInModal(order.id);
+                        }}
+                      >
+                        {order.clientName}
+                      </StyledElementWrapper>
+                    </Order>
+                  ))}
+                </UnOrderedList>
+              </KanbanSectionWrapper>
+              <KanbanSectionWrapper isInProgress>
+                <p>In progress</p>
+                <UnOrderedList>
+                  {allOrders.inProgress.map((order, id) => (
+                    <Order key={id}>
+                      <StyledElementWrapper
+                        onClick={() => {
+                          handleOrderDetailsInModal(order.id);
+                        }}
+                      >
+                        {order.clientName}
+                      </StyledElementWrapper>
+                    </Order>
+                  ))}
+                </UnOrderedList>
+              </KanbanSectionWrapper>
+              <KanbanSectionWrapper isDone>
+                <p>Done</p>
+                <UnOrderedList>
+                  {allOrders.done.map((order, id) => (
+                    <Order key={id}>
+                      <StyledElementWrapper
+                        onClick={() => {
+                          handleOrderDetailsInModal(order.id);
+                        }}
+                      >
+                        {order.clientName}
+                      </StyledElementWrapper>
+                    </Order>
+                  ))}
+                </UnOrderedList>
+              </KanbanSectionWrapper>
+              {isModalOpen ? (
+                <ProductDetailsModal
+                  updateAllOrdersState={updateAllOrdersState}
+                  saveChangesInApi={saveChangesInApi}
+                  orderDetails={orderDetailsInModal}
+                  SetIsModalOpen={SetIsModalOpen}
+                  handleChangeOrderStatus={handleChangeOrderStatus}
+                ></ProductDetailsModal>
+              ) : null}
+            </>
+          )}
         </>
       )}
-      {OrdersStatus === 'success' && !orders.length > 0 ? <ErrorMessage></ErrorMessage> : null}
     </StyledViewWrapper>
   );
 };

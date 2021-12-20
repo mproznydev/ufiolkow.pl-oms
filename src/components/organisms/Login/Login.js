@@ -7,6 +7,7 @@ import UnauthenticatedDashboard from 'components/templates/UnauthenticatedLayout
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { useCurrentDispatchUser } from 'contexts/CurrentUserProvider';
+import { useEffect } from 'react/cjs/react.development';
 
 const ButtonWithCheckboxWrapper = styled.div`
   display: flex;
@@ -43,7 +44,11 @@ const Login = () => {
           }
         });
     } catch (e) {
-      setError(e.response.data.message[0].messages[0].message);
+      //ogarnac errory z logowania
+      console.log(e);
+      // if (e.response.data.message) {
+      //   setError(e.response.data.message[0].messages[0].message);
+      // }
     }
   };
 
