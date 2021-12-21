@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router';
-import axios from 'axios';
 import ViewWrapper from 'components/atoms/ViewWrapper/ViewWrapper';
 import OrderDetailsFormField from 'components/molecules/OrderDetailsFormField/OrderDetailsFormField';
 import { ElementWrapper } from 'components/atoms/ElementWrapper/ElementWrapper';
@@ -64,6 +63,7 @@ const ProductsWrapper = styled(ElementWrapper)`
   flex-direction: column;
   padding: 1rem;
   margin-left: 0.5rem;
+  min-width: 445px;
 `;
 
 const ProductWrapper = styled.div`
@@ -74,8 +74,8 @@ const ProductWrapper = styled.div`
 
 const OrderDetails = () => {
   const { id } = useParams();
-  const { data: order, status: orderStatus } = useOrder(id);
-  const { mutate: saveOrder, status: saveOrderStatus } = useSaveOrder();
+  const { data: order } = useOrder(id);
+  const { mutate: saveOrder } = useSaveOrder();
   const [inputValues, setInputValues] = useState({
     clientAdress: '',
     clientName: '',
@@ -134,7 +134,6 @@ const OrderDetails = () => {
     }
     handleToggleEdit();
   };
-
   return (
     <Wrapper>
       <ViewWrapper title="Order details">
@@ -164,7 +163,7 @@ const OrderDetails = () => {
             ></OrderDetailsFormField>
             <OrderDetailsFormField
               isEditable={isEditable}
-              value={properData(inputValues.created_at)}
+              value={properData(inputValues.createdAt)}
               name="clientAdress"
               handleInputChange={handleClientInputChange}
               label="created date"
@@ -200,9 +199,11 @@ const OrderDetails = () => {
 
             {isEditable ? (
               <>
-                <DeleteButton type="button" onClick={handleDeleteProduct}>
-                  delete last product
-                </DeleteButton>
+                {inputValues.products.length > 0 ? (
+                  <DeleteButton type="button" onClick={handleDeleteProduct}>
+                    delete last product
+                  </DeleteButton>
+                ) : null}
                 <StyledButton type="button" onClick={handleAddNewProduct}>
                   add new
                 </StyledButton>

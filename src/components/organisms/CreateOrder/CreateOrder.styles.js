@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import ViewWrapper from 'components/atoms/ViewWrapper/ViewWrapper';
 import { Button } from 'components/atoms/Button/Button';
+import { DeleteButton } from 'components/atoms/DeleteButton/DeleteButton';
 
 export const StyledAddOrderButton = styled(Button)`
   position: absolute;
@@ -82,4 +83,9 @@ export const StyledInput = styled.input`
 `;
 export const Title = styled.p`
   font-weight: 500;
+`;
+export const StyledDeleteButton = styled(DeleteButton)`
+  position: absolute;
+  top: 0;
+  right: 0;
 `;

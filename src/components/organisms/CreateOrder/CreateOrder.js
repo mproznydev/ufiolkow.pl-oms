@@ -1,9 +1,6 @@
 import React, { useState, useRef } from 'react';
-import styled from 'styled-components';
 import FormField from 'components/molecules/FormField/FormField';
-import axios from 'axios';
 import { useCreateOrder } from 'hooks/useCreateOrder';
-import { DeleteButton } from 'components/atoms/DeleteButton/DeleteButton';
 import {
   StyledAddOrderButton,
   Wrapper,
@@ -15,15 +12,9 @@ import {
   ProductQuantityWrapper,
   StyledInput,
   Title,
+  StyledDeleteButton,
 } from './CreateOrder.styles';
-import { useNavigate } from 'react-router';
 import LoadingSpinner from 'components/atoms/LoadingSpinner/LoadingSpinner';
-
-const StyledDeleteButton = styled(DeleteButton)`
-  position: absolute;
-  top: 0;
-  right: 0;
-`;
 
 const initialClientFormValues = {
   clientName: '',
@@ -36,7 +27,6 @@ const initialProductFormValues = {
 
 const CreateOrder = () => {
   const { mutate: handleCreateOrder, status } = useCreateOrder();
-  const navigate = useNavigate();
   const firstInputEl = useRef();
   const [clientFormValues, setClientFormValues] = useState(initialClientFormValues);
   const [productFormValues, setProductFormValues] = useState(initialProductFormValues);
@@ -76,7 +66,6 @@ const CreateOrder = () => {
     e.preventDefault();
     if (clientFormValues.clientName !== '' && clientFormValues.clientAdress !== '' && products.length > 0) {
       handleCreateOrder({ clientName: clientFormValues.clientName, clientAdress: clientFormValues.clientAdress, products: [...products] });
-      // navigate('/orders');
       setClientFormValues(initialClientFormValues);
       setProductFormValues(initialProductFormValues);
       setProducts([]);

@@ -1,5 +1,5 @@
 import ViewWrapper from 'components/atoms/ViewWrapper/ViewWrapper';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -95,7 +95,7 @@ const CreateNewOrderWrapper = styled.div`
 `;
 
 const OrderDetailsTable = () => {
-  const { data = [], status: OrdersStatus, isError } = useOrders();
+  const { data = [], status: OrdersStatus } = useOrders();
   const { mutate: deleteOrder, status: DeletingStatus } = useDeleteOrder();
   const navigate = useNavigate();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);

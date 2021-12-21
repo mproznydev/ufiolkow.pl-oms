@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import Kanban from 'components/organisms/Kanban/Kanban';
 import News from 'components/organisms/News/News';
 import Messages from 'components/organisms/Messages/Messages';

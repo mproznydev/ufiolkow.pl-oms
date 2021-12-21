@@ -1,11 +1,9 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import ViewWrapper from 'components/atoms/ViewWrapper/ViewWrapper';
 import { ElementWrapper } from 'components/atoms/ElementWrapper/ElementWrapper';
 import { useFetch } from 'hooks/useFetch';
 import { useSendMessage } from 'hooks/useSendMessage';
-import _ from 'lodash';
 const StyledViewWrapper = styled(ViewWrapper)`
   display: flex;
   justify-self: center;
@@ -67,10 +65,6 @@ const WritingForm = styled.form`
   position: relative;
 `;
 
-const Message = styled.div`
-  /* padding: 0.5rem 0 0rem 0; */
-`;
-
 const SendButton = styled.button`
   position: absolute;
   border: none;
@@ -93,7 +87,7 @@ const Context = styled.p`
 `;
 
 const Messages = ({ className }) => {
-  const { data: messages, status } = useFetch('messages');
+  const { data: messages } = useFetch('messages');
   const [writtenMessage, setWrittenMessage] = useState('');
   const { mutate: sendMessage, status: messageStatus } = useSendMessage();
   const scrollToFirstMessRef = useRef();
@@ -104,6 +98,7 @@ const Messages = ({ className }) => {
   const MessageChange = (e) => {
     setWrittenMessage(e.target.value);
   };
+
   useEffect(() => {
     if (messages && messages.length > 0) {
       const AllRepeatedClients = messages.map((message) => {
@@ -123,11 +118,9 @@ const Messages = ({ className }) => {
   const handleSendMessage = (e) => {
     e.preventDefault();
     const messageData = { message: writtenMessage, client: currentClient, sender: 'boss' };
-    console.log(messageData);
     sendMessage(messageData);
     setWrittenMessage('');
     writingWrapperRef.current.focus();
-    // setCurrentClient(currentClient);
   };
 
   return (
@@ -147,7 +140,7 @@ const Messages = ({ className }) => {
             ? messages
                 .filter((message) => message.client === currentClient)
                 .map((message) => (
-                  <div>
+                  <div key={message.id}>
                     <Sender>{message.sender}:</Sender>
                     <Context>{message.message}</Context>
                   </div>

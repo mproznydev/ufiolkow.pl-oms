@@ -21,7 +21,6 @@ export const Input = styled.input`
   width: 220px;
   height: 28px;
   background-color: ${({ theme }) => theme.colors.lightGrey};
-  /* border: 1px solid ${({ theme }) => theme.colors.darkGrey}; */
   border: none;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   color: ${({ theme }) => theme.colors.black};

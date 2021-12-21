@@ -1,6 +1,3 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { useQuery } from 'react-query';
 import axios from 'axios';
 

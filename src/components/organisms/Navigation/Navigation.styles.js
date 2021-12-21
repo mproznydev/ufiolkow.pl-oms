@@ -38,6 +38,8 @@ export const ListElWrapper = styled(NavLink)`
   background-color: transparent;
   border: 1px solid transparent;
   position: relative;
+  cursor: pointer;
+
   svg {
     width: 60px;
     height: 40px;

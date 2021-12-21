@@ -44,8 +44,6 @@ const LogoWrapper = styled.div`
 const CredentialsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  /* justify-content: center;
-  align-content: center; */
   align-self: center;
 `;
 

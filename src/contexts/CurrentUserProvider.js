@@ -23,7 +23,6 @@ export const CurrentUserProvider = ({ children }) => {
   useEffect(() => {
     (async () => {
       try {
-        console.log('the fuck');
         const { data } = await axios.get('https://ufiolkow-oms.herokuapp.com/users/me', {
           withCredentials: true,
         });

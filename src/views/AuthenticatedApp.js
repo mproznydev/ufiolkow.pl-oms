@@ -6,6 +6,7 @@ import Navigation from 'components/organisms/Navigation/Navigation';
 import LoggedAs from 'components/organisms/LoggedAs/LoggedAs';
 import SearchBar from 'components/organisms/SearchBar/SearchBar';
 import { ReactComponent as LogoIcon } from 'assets/images/logo-white.svg';
+import LoadingSpinner from 'components/atoms/LoadingSpinner/LoadingSpinner';
 
 const Wrapper = styled.div`
   display: grid;
@@ -16,6 +17,7 @@ const Wrapper = styled.div`
 const StyledLogoIcon = styled(LogoIcon)`
   width: 200px;
   height: 200px;
+  margin-bottom: 5rem;
 `;
 
 const IsLoadingWrapper = styled.div`
@@ -23,8 +25,9 @@ const IsLoadingWrapper = styled.div`
   height: 100vh;
   background-color: ${({ theme }) => theme.colors.secondary};
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
 `;
 
 const SearchAreaWrapper = styled.div`
@@ -42,7 +45,6 @@ const StyledSearchBar = styled(SearchBar)`
 const AuthenticatedApp = () => {
   const navigate = useNavigate();
   const currentUser = useCurrentUser();
-  console.log(currentUser);
   useEffect(() => {
     if (!currentUser.isAuthenticated && !currentUser.isLoading) {
       navigate('/login');
@@ -54,6 +56,7 @@ const AuthenticatedApp = () => {
       {currentUser.isLoading ? (
         <IsLoadingWrapper>
           <StyledLogoIcon></StyledLogoIcon>
+          <LoadingSpinner></LoadingSpinner>
         </IsLoadingWrapper>
       ) : (
         <Wrapper>
