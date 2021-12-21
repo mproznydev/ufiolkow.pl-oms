@@ -15,6 +15,9 @@ import OrderDetails from './OrderDetails';
 import CreateOrders from 'components/organisms/CreateOrder/CreateOrder';
 import KanbanPage from './KanbanPage';
 import Messages from 'components/organisms/Messages/Messages';
+import ClientsPage from './ClientsPage';
+import ClientDetails from 'components/organisms/ClientDetails/ClientDetails';
+
 function Root() {
   return (
     <BrowserRouter>
@@ -31,7 +34,10 @@ function Root() {
                 <Route path="new" element={<CreateOrders></CreateOrders>}></Route>
               </Route>
               <Route path="messages" element={<Messages></Messages>}></Route>
-              <Route path="clients" element={<p>clients</p>}></Route>
+              <Route path="clients" element={<Outlet></Outlet>}>
+                <Route index element={<ClientsPage></ClientsPage>}></Route>
+                <Route path=":id" element={<ClientDetails></ClientDetails>}></Route>
+              </Route>
             </Route>
             <Route path="/login" element={<UnauthenticatedApp></UnauthenticatedApp>}>
               <Route index element={<Login></Login>}></Route>

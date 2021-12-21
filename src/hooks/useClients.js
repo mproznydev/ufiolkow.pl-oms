@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import axios from 'axios';
 
-const findClient = async () => {
+const fetchClients = async () => {
   try {
     const resp = await axios.get(`https://ufiolkow-oms.herokuapp.com/clients/`, { withCredentials: true });
     return resp.data;
@@ -11,5 +11,5 @@ const findClient = async () => {
 };
 
 export const useClients = (clientId) => {
-  return useQuery('clients', () => findClient());
+  return useQuery('clients', () => fetchClients());
 };

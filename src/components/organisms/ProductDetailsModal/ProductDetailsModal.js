@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import Modal from 'components/organisms/Modal/Modal';
 import { Button } from 'components/atoms/Button/Button';
 import { useNavigate } from 'react-router';

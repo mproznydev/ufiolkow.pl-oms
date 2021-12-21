@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import ViewWrapper from 'components/atoms/ViewWrapper/ViewWrapper';
 import { ElementWrapper } from 'components/atoms/ElementWrapper/ElementWrapper';

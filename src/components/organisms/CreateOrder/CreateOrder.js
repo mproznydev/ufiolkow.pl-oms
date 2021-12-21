@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import FormField from 'components/molecules/FormField/FormField';
-import axios from 'axios';
 import { useCreateOrder } from 'hooks/useCreateOrder';
 import { DeleteButton } from 'components/atoms/DeleteButton/DeleteButton';
 import {
@@ -16,7 +15,6 @@ import {
   StyledInput,
   Title,
 } from './CreateOrder.styles';
-import { useNavigate } from 'react-router';
 import LoadingSpinner from 'components/atoms/LoadingSpinner/LoadingSpinner';
 
 const StyledDeleteButton = styled(DeleteButton)`
@@ -36,7 +34,6 @@ const initialProductFormValues = {
 
 const CreateOrder = () => {
   const { mutate: handleCreateOrder, status } = useCreateOrder();
-  const navigate = useNavigate();
   const firstInputEl = useRef();
   const [clientFormValues, setClientFormValues] = useState(initialClientFormValues);
   const [productFormValues, setProductFormValues] = useState(initialProductFormValues);
