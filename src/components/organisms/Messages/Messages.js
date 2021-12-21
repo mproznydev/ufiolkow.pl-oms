@@ -65,10 +65,6 @@ const WritingForm = styled.form`
   position: relative;
 `;
 
-// const Message = styled.div`
-//   /* padding: 0.5rem 0 0rem 0; */
-// `;
-
 const SendButton = styled.button`
   position: absolute;
   border: none;
@@ -102,6 +98,7 @@ const Messages = ({ className }) => {
   const MessageChange = (e) => {
     setWrittenMessage(e.target.value);
   };
+
   useEffect(() => {
     if (messages && messages.length > 0) {
       const AllRepeatedClients = messages.map((message) => {
@@ -121,11 +118,9 @@ const Messages = ({ className }) => {
   const handleSendMessage = (e) => {
     e.preventDefault();
     const messageData = { message: writtenMessage, client: currentClient, sender: 'boss' };
-    console.log(messageData);
     sendMessage(messageData);
     setWrittenMessage('');
     writingWrapperRef.current.focus();
-    // setCurrentClient(currentClient);
   };
 
   return (

@@ -43,7 +43,6 @@ const Login = () => {
           }
         });
     } catch (e) {
-      //ogarnac errory z logowania
       console.log(e);
       if (e.response.data.message[0].messages[0].message) {
         setError(e.response.data.message[0].messages[0].message);

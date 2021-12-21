@@ -41,5 +41,3 @@ function SearchBar({ className }) {
 SearchBar.propTypes = {};
 
 export default SearchBar;
-
-//!matchingClients[0] === ''
