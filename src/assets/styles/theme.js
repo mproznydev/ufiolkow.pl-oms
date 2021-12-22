@@ -8,7 +8,7 @@ export const theme = {
     kanbanInProgess: '#ADDFFB',
     kanbanDone: '#CBFBAD',
     darkPurple: '#4F006B',
-    lightPurple: '#8802b9b2',
+    lightPurple: '#c934ff',
     lightGrey: '#f3f3f3',
     darkGrey: '#c9c9c9',
     grey: '#cacaca',

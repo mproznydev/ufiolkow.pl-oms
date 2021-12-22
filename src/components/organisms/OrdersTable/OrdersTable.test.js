@@ -1,9 +1,7 @@
-import { render, screen, fireEvent } from '@testing-library/react';
 import OrdersTable from './OrdersTable';
 import { renderWithProviders } from 'tests/utils';
 import { server } from 'setupTests';
 import { rest } from 'msw';
-import Modal from '../Modal/Modal';
 
 describe('Orders Table', () => {
   it('shows orders when are fetched', async () => {
@@ -19,6 +17,6 @@ describe('Orders Table', () => {
     );
     const result = renderWithProviders(<OrdersTable></OrdersTable>);
 
-    expect(await result.findByText(/Sorry but there is no objects/i)).toBeInTheDocument();
+    expect(await result.findByText(/Sorry but there is no data.../i)).toBeInTheDocument();
   });
 });

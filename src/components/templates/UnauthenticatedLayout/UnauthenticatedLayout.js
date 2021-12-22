@@ -21,6 +21,9 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   height: 1.8rem;
   transition: all 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.04);
+  }
 `;
 
 const StyledLogo = styled(Logo)`
