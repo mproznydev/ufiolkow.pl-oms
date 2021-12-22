@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Button } from 'components/atoms/Button/Button';
 import FormField from 'components/molecules/UnauthenticatedFormField/UnauthenticatedFormField';
 import UnauthenticatedDashboard from 'components/templates/UnauthenticatedLayout/UnauthenticatedLayout';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useRegister } from 'hooks/useRegister';
 
 const initialData = {
   username: '',
@@ -18,30 +19,30 @@ const ButtonWithCheckboxWrapper = styled.div`
 `;
 
 const Register = () => {
-  let navigate = useNavigate();
-  const [formValue, setFormValue] = useState(initialData);
-  const [error, setError] = useState('');
-
+  const { mutate: register, isError, isSuccess } = useRegister();
+  const navigate = useNavigate();
+  const [credentialValues, setCredentialValues] = useState(initialData);
+  const [errorMessage, setErrorMessage] = useState('');
   const handleInputChange = (e) => {
-    setFormValue({
-      ...formValue,
+    setCredentialValues({
+      ...credentialValues,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleRegister = async (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
-    try {
-      await axios.post('https://ufiolkow-oms.herokuapp.com/auth/local/register', formValue).then((res) => {
-        if (res.status === 200) {
-          setFormValue(initialData);
-          navigate('/login');
-        }
-      });
-    } catch (e) {
-      setError(e.response.data.message[0].messages[0].message);
-    }
+    register(credentialValues);
   };
+
+  useEffect(() => {
+    if (isSuccess && isError === false) {
+      setCredentialValues(initialData);
+      navigate('/login');
+    } else if (isError) {
+      setErrorMessage('im sorry there is a problem with credentials');
+    }
+  }, [isSuccess, isError, navigate]);
 
   return (
     <UnauthenticatedDashboard onSubmit={handleRegister}>
@@ -49,7 +50,7 @@ const Register = () => {
         type="text"
         name="username"
         id="username"
-        value={formValue.username}
+        value={credentialValues.username}
         label="user name"
         placeholder="user name"
         onChange={handleInputChange}
@@ -60,7 +61,7 @@ const Register = () => {
         name="email"
         label="email"
         placeholder="email"
-        value={formValue.email}
+        value={credentialValues.email}
         onChange={handleInputChange}
       ></FormField>
       <FormField
@@ -68,14 +69,14 @@ const Register = () => {
         name="password"
         id="password"
         label="password"
-        value={formValue.password}
+        value={credentialValues.password}
         placeholder="password"
         onChange={handleInputChange}
       ></FormField>
       <ButtonWithCheckboxWrapper>
         <Button type="submit">Register</Button>
       </ButtonWithCheckboxWrapper>
-      {error ? <p>{error}</p> : null}
+      {errorMessage ? <p>{errorMessage}</p> : null}
     </UnauthenticatedDashboard>
   );
 };

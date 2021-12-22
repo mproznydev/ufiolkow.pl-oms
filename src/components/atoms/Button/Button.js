@@ -13,4 +13,8 @@ export const Button = styled.button`
   margin: 1rem;
   height: 1.8rem;
   transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.04);
+  }
 `;
