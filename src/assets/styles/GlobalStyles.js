@@ -8,7 +8,7 @@ export const GlobalStyle = createGlobalStyle`
   *, *::after, *::before {
     box-sizing: inherit;
   }
-  body, ul, label,p {
+  body, ul, label,p, textarea {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;

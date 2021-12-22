@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Button } from 'components/atoms/Button/Button';
 import FormField from 'components/molecules/UnauthenticatedFormField/UnauthenticatedFormField';
 import UnauthenticatedDashboard from 'components/templates/UnauthenticatedLayout/UnauthenticatedLayout';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useRegister } from 'hooks/useRegister';
 
