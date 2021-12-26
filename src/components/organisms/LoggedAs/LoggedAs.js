@@ -3,14 +3,14 @@ import { Wrapper, Text } from './LoggedAs.styles';
 import { useCurrentUser } from 'contexts/CurrentUserProvider';
 
 function LoggedAs() {
-  const currentUser = useCurrentUser();
+  const { email = 'unknown' } = useCurrentUser({});
 
   return (
     <Wrapper>
       <Text>
         Logged as:
         <br />
-        <span>{currentUser.email}</span>
+        <span>{email}</span>
       </Text>
     </Wrapper>
   );

@@ -26,6 +26,4 @@ const ViewWrapper = React.forwardRef(({ title, className, children }, ref) => (
   </Wrapper>
 ));
 
-ViewWrapper.propTypes = {};
-
 export default ViewWrapper;

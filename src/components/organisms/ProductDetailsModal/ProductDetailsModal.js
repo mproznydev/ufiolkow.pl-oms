@@ -88,7 +88,6 @@ const ProductDetailsModal = ({ orderDetails, SetIsModalOpen, handleChangeOrderSt
             </ClientDetailWrapper>
             <ClientDetailWrapper as="form">
               <label htmlFor="status-select">Status:</label>
-              {/* statusOption has value so you can check initial state and pass there  */}
               <StatusOption id="status-select" name="status" onChange={handleChangeOrderStatus}>
                 <option value="new" selected={'done' === orderDetails.status}>
                   new

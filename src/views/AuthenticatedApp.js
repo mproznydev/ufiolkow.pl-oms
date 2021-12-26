@@ -45,6 +45,7 @@ const StyledSearchBar = styled(SearchBar)`
 const AuthenticatedApp = () => {
   const navigate = useNavigate();
   const currentUser = useCurrentUser();
+
   useEffect(() => {
     if (!currentUser.isAuthenticated && !currentUser.isLoading) {
       navigate('/login');

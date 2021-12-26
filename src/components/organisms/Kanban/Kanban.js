@@ -85,8 +85,8 @@ const Kanban = ({ className }) => {
               <KanbanSectionWrapper isInProgress>
                 <p>In progress</p>
                 <UnOrderedList>
-                  {groupedOrders.inProgress.map((order, id) => (
-                    <Order key={id}>
+                  {groupedOrders.inProgress.map((order) => (
+                    <Order key={order.id}>
                       <StyledElementWrapper
                         onClick={() => {
                           handleOrderDetailsInModal(order.id);
@@ -101,8 +101,8 @@ const Kanban = ({ className }) => {
               <KanbanSectionWrapper isDone>
                 <p>Done</p>
                 <UnOrderedList>
-                  {groupedOrders.done.map((order, id) => (
-                    <Order key={id}>
+                  {groupedOrders.done.map((order) => (
+                    <Order key={order.id}>
                       <StyledElementWrapper
                         onClick={() => {
                           handleOrderDetailsInModal(order.id);

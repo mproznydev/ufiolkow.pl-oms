@@ -7,17 +7,21 @@ function SearchBar({ className }) {
   const { data: clients } = useClients();
   const navigate = useNavigate();
   const [matchingClients, setMatchingClients] = useState([]);
+
   const handleChange = (e) => {
     const matchingClients = clients.filter((client) => {
       const searchedClinet = e.target.value.toLowerCase();
       const clientName = client.name.toLowerCase();
       return clientName.includes(searchedClinet);
     });
+
     setMatchingClients(matchingClients);
+
     if (e.target.value === '') {
-      setMatchingClients('');
+      setMatchingClients(['']);
     }
   };
+
   const handleOpenClientDetails = (id) => {
     navigate(`/clients/${id}`);
   };

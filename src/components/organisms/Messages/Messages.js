@@ -15,29 +15,29 @@ import { useFetch } from 'hooks/useFetch';
 import { useSendMessage } from 'hooks/useSendMessage';
 
 const Messages = ({ className }) => {
-  const { data: messages } = useFetch('messages');
-  const [writtenMessage, setWrittenMessage] = useState('');
+  const { data: messages = [] } = useFetch('messages');
   const { mutate: sendMessage, status: messageStatus } = useSendMessage();
-  const scrollToFirstMessRef = useRef();
+  const [writtenMessage, setWrittenMessage] = useState('');
+  const latestMessage = useRef();
   const writingWrapperRef = useRef();
-  const [clients, setClients] = useState();
-  const [currentClient, setCurrentClient] = useState('');
+  const [senders, setSenders] = useState([]);
+  const [currentSender, setCurrentSender] = useState('');
 
   useEffect(() => {
     if (messages && messages.length > 0) {
-      const AllRepeatedClients = messages.map((message) => {
+      const AllRepeatedSenders = messages.map((message) => {
         return message.client;
       });
-      const uniqueClients = [...new Set(AllRepeatedClients)];
-      setClients(uniqueClients);
+      const uniqueSenders = [...new Set(AllRepeatedSenders)];
+      setSenders(uniqueSenders);
     }
   }, [messages]);
 
   useEffect(() => {
-    if (scrollToFirstMessRef && scrollToFirstMessRef.current) {
-      scrollToFirstMessRef.current.scrollIntoView();
+    if (latestMessage && latestMessage.current) {
+      latestMessage.current.scrollIntoView();
     }
-  }, [currentClient]);
+  }, [currentSender]);
 
   const MessageChange = (e) => {
     setWrittenMessage(e.target.value);
@@ -45,7 +45,7 @@ const Messages = ({ className }) => {
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-    const messageData = { message: writtenMessage, client: currentClient, sender: 'boss' };
+    const messageData = { message: writtenMessage, client: currentSender, sender: 'boss' };
     sendMessage(messageData);
     setWrittenMessage('');
     writingWrapperRef.current.focus();
@@ -54,27 +54,23 @@ const Messages = ({ className }) => {
   return (
     <StyledViewWrapper className={className} title="Messages">
       <ContactsWrapper>
-        {clients
-          ? clients.map((client, id) => (
-              <ClientName key={id} onClick={() => setCurrentClient(client)} isUsed={client === currentClient}>
-                {client}
-              </ClientName>
-            ))
-          : null}
+        {senders.map((client, id) => (
+          <ClientName key={id} onClick={() => setCurrentSender(client)} isUsed={client === currentSender}>
+            {client}
+          </ClientName>
+        ))}
       </ContactsWrapper>
       <MessagesWithWritingWrapper>
         <MessagesWrapper>
           {messages
-            ? messages
-                .filter((message) => message.client === currentClient)
-                .map((message) => (
-                  <div key={message.id}>
-                    <Sender>{message.sender}:</Sender>
-                    <Context>{message.message}</Context>
-                  </div>
-                ))
-            : null}
-          <div ref={scrollToFirstMessRef}></div>
+            .filter((message) => message.client === currentSender)
+            .map((message) => (
+              <div key={message.id}>
+                <Sender>{message.sender}:</Sender>
+                <Context>{message.message}</Context>
+              </div>
+            ))}
+          <div ref={latestMessage}></div>
         </MessagesWrapper>
         <WritingForm onSubmit={handleSendMessage}>
           <WritingWrapper

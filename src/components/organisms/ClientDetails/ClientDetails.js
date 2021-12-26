@@ -25,6 +25,4 @@ const ClientDetails = () => {
   );
 };
 
-ClientDetails.propTypes = {};
-
 export default ClientDetails;

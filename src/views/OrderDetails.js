@@ -10,8 +10,6 @@ import { useOrder } from 'hooks/useOrder';
 import { useSaveOrder } from 'hooks/useSaveOrder';
 
 const Wrapper = styled.div`
-  /* grid-column: 2/4; */
-  /* grid-row: 2/3; */
   justify-self: center;
   align-self: center;
   max-width: 900px;
@@ -74,25 +72,31 @@ const ProductWrapper = styled.div`
 
 const OrderDetails = () => {
   const { id } = useParams();
-  const { data: order } = useOrder(id);
+  const { data: order = {} } = useOrder(id);
   const { mutate: saveOrder } = useSaveOrder();
   const [inputValues, setInputValues] = useState({
     clientAdress: '',
     clientName: '',
-    products: [{}],
+    products: [],
     status: '',
   });
   const [isEditable, setIsEditable] = useState(false);
 
+  // useEffect(() => {
+  //   if (order) {
+  //     (async () => {
+  //       try {
+  //         setInputValues(order);
+  //       } catch (e) {
+  //         console.log(e);
+  //       }
+  //     })();
+  //   }
+  // }, [order]);
+
   useEffect(() => {
     if (order) {
-      (async () => {
-        try {
-          setInputValues(order);
-        } catch (e) {
-          console.log(e);
-        }
-      })();
+      setInputValues(order);
     }
   }, [order]);
 
@@ -215,7 +219,5 @@ const OrderDetails = () => {
     </Wrapper>
   );
 };
-
-OrderDetails.propTypes = {};
 
 export default OrderDetails;

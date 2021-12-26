@@ -14,8 +14,8 @@ const ButtonWithCheckboxWrapper = styled.div`
 `;
 
 const Login = () => {
-  let navigate = useNavigate();
-  const [error, setError] = useState();
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
   const dispatch = useCurrentDispatchUser();
   const [userData, setUserData] = useState({
     identifier: '',
@@ -43,7 +43,6 @@ const Login = () => {
           }
         });
     } catch (e) {
-      console.log(e);
       if (e.response.data.message[0].messages[0].message) {
         setError(e.response.data.message[0].messages[0].message);
       } else {
