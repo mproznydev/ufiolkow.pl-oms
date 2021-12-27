@@ -50,6 +50,11 @@ Some of the key features:
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Getting Started
+Account for testing :boom:
+<br/>
+login: admin@gmail.com
+<br/>
+password: admin
 
 To get a local copy up and running follow these simple steps.
 
