@@ -6,7 +6,7 @@
     <img src="https://raw.githubusercontent.com/mproznydev/ufiolkow.pl-oms/f74ffc13d33c5f28dbdb3e6bd401e8602ada0a30/src/assets/images/orders-icon.svg" alt="Logo">
   </a>
 
-  <h3 align="center">Order management system</h3>
+  <h3 align="center">Order management system :bookmark_tabs:</h3>
 
   <p align="center">
    app dedicated for ice-cream industry for managing orders
@@ -19,7 +19,7 @@
   </p>
 </div>
 
-## About The Project
+## About The Project :ice_cream:
 
 ![](https://github.com/mproznydev/ufiolkow.pl-oms/blob/master/src/assets/demo/demo.webp)
 
@@ -36,7 +36,7 @@ Some of the key features:
 - basic chat.
 - kanban board with possibility to change order status (new, in progress, done)
 
-### Built With
+### Built With :hammer:
 
 - [React.js](https://reactjs.org/)
 - [Styled-components](https://styled-components.com/)
