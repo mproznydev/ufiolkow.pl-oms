@@ -19,8 +19,7 @@ const ClientDetails = () => {
 
   return (
     <StyledViewWrapper title="client details">
-      <p>{client.name}</p>
-      <p>{client.adress}</p>
+      <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>We are working on it...</h3>
     </StyledViewWrapper>
   );
 };

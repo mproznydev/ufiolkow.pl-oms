@@ -55,7 +55,14 @@ const Messages = ({ className }) => {
     <StyledViewWrapper className={className} title="Messages">
       <ContactsWrapper>
         {senders.map((client, id) => (
-          <ClientName key={id} onClick={() => setCurrentSender(client)} isUsed={client === currentSender}>
+          <ClientName
+            key={id}
+            onClick={() => {
+              setCurrentSender(client);
+              setWrittenMessage('');
+            }}
+            isUsed={client === currentSender}
+          >
             {client}
           </ClientName>
         ))}
@@ -74,14 +81,17 @@ const Messages = ({ className }) => {
         </MessagesWrapper>
         <WritingForm onSubmit={handleSendMessage}>
           <WritingWrapper
+            readonly="readonly"
             as="input"
             ref={writingWrapperRef}
             type="text"
-            placeholder="Aa"
+            placeholder={currentSender === '' ? 'select conversation' : 'Aa'}
             value={writtenMessage}
             onChange={MessageChange}
           ></WritingWrapper>
-          <SendButton type="submit">{messageStatus === 'loading' ? 'wait' : 'send'}</SendButton>
+          <SendButton type="submit" disabled={currentSender === '' ? true : false}>
+            {messageStatus === 'loading' ? 'wait' : 'send'}
+          </SendButton>
         </WritingForm>
       </MessagesWithWritingWrapper>
     </StyledViewWrapper>
