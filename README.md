@@ -27,7 +27,7 @@ This application is mvp created for small company that is dealing with ice-cream
 <br/>
 The idea was to simplify collecting orders from clients (b2b) and enable managing them.
 Due to fact that it is mvp application, it has only version for admin, although site for clients will be prepared. </br>
-live: https://naughty-yalow-aa259a.netlify.app 
+live: https://naughty-yalow-aa259a.netlify.app (initial loading page can last even 1 min due to heroku free plan, i am sorry)
 
 Some of the key features:
 
