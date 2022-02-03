@@ -8,9 +8,5 @@ const handleSaveOrder = async (order) => {
 };
 
 export const useSaveOrder = () => {
-  return useMutation((id, order) => handleSaveOrder(id, order), {
-    onSuccess: () => {
-      //   queryClient.invalidateQueries('orders');
-    },
-  });
+  return useMutation((id, order) => handleSaveOrder(id, order), {});
 };
