@@ -41,6 +41,10 @@ const SearchAreaWrapper = styled.div`
 const StyledSearchBar = styled(SearchBar)`
   margin-left: 15px;
 `;
+const LoadingText = styled.p`
+  color: ${({ theme }) => theme.colors.white};
+  margin-top: 1rem;
+`;
 
 const AuthenticatedApp = () => {
   const navigate = useNavigate();
@@ -58,6 +62,7 @@ const AuthenticatedApp = () => {
         <IsLoadingWrapper>
           <StyledLogoIcon></StyledLogoIcon>
           <LoadingSpinner></LoadingSpinner>
+          <LoadingText>Due to Heroku, loading might take up to 1min</LoadingText>
         </IsLoadingWrapper>
       ) : (
         <Wrapper>

@@ -82,18 +82,6 @@ const OrderDetails = () => {
   });
   const [isEditable, setIsEditable] = useState(false);
 
-  // useEffect(() => {
-  //   if (order) {
-  //     (async () => {
-  //       try {
-  //         setInputValues(order);
-  //       } catch (e) {
-  //         console.log(e);
-  //       }
-  //     })();
-  //   }
-  // }, [order]);
-
   useEffect(() => {
     if (order) {
       setInputValues(order);
